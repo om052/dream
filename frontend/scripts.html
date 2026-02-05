@@ -845,11 +845,15 @@
                         ${script.file ? '<p><em>📄 PDF File</em></p>' : '<p><em>📝 Created Script</em></p>'}
                     </div>
                     <div style="display: flex; gap: 8px; margin-top: 15px;">
-                        <<button type="button" onclick="viewScript('${script._id}')" style="flex: 1; padding: 8px 12px; background: #60a5fa; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">View</button>
-                        <button type="button" onclick="toggleReadList('${script._id}')" style="flex: 1; padding: 8px 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Rate</button>
-                        <button id="readBtn-${script._id}" onclick="event.stopPropagation(); toggleReadList('${script._id}')" style="padding: 8px 12px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">📖 Add to Read</button>
+                       <button type="button" onclick="viewScript('${script._id}')">View</button>
+                       <button type="button" onclick="rateScript('${script._id}')">Rate</button>
+                       <button type="button" id="readBtn-${script._id}" onclick="toggleReadList('${script._id}')">📖 Add to Read</button>
                     </div>
-                `;
+                    `;
+                  let currentScriptId = null;
+                  document.addEventListener("submit", e => e.preventDefault());
+
+                
                 grid.appendChild(card);
 
                 // Check read status for this script
