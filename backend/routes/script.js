@@ -112,7 +112,7 @@ router.put("/:id", auth, async (req, res) => {
 // Get public scripts for homepage
 router.get("/public", async (req, res) => {
     try {
-        const scripts = await Script.find({ visibility: 'Public' })
+        const scripts = await Script.find({ visibility: 'Public', status: 'approved' })
             .populate('uploadedBy', 'name')
             .sort({ votes: -1, updatedAt: -1 })
             .limit(8); // Limit to 8 for showcase
