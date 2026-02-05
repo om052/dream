@@ -792,17 +792,17 @@
         // Load scripts on page load
         loadScripts();
 
-        function showTab(tabName) {
+        function showTab(tabName, event = null) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) event.target.classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
 
-        function showModalTab(tabName) {
+        function showModalTab(tabName, event = null) {
             document.querySelectorAll('#scriptModal .tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('#scriptModal .tab-content').forEach(content => content.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) event.target.classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
 
@@ -946,28 +946,30 @@
 
                 document.getElementById('editContent').value = script.content;
 async function loadQuickRating(scriptId) {
+   if(!scriptId) return;
+
    try {
-      const res = await fetch(`/api/scripts/${scriptId}/rating`, {
+      const res = await fetch(`/api/script/${scriptId}/rating`, {
          headers:{
-           Authorization:`Bearer ${localStorage.getItem("token")}`
+           Authorization:`Bearer ${token}`
          }
       });
 
       if(res.ok){
          const data = await res.json();
-         document.getElementById("quickRatingValue").innerText =
-            data.averageRating || "No rating";
+         console.log("Quick rating:", data.averageRating);
       }
    } catch(err){
       console.error("Quick rating error", err);
    }
 }
 
+
                 loadComments();
                 loadVersions();
                 loadCollaborators();
                 loadRating();
-                loadQuickRating();
+                loadQuickRating(scriptId);
 
                 document.getElementById('scriptModal').style.display = 'block';
             } catch (err) {
