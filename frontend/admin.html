@@ -1150,15 +1150,14 @@
  <script>
         console.log("ADMIN PAGE LOADED");
 
-const adminToken = localStorage.getItem("adminToken");
-console.log("Token from storage:", adminToken);
-
-if (!adminToken) {
-  console.log("NO TOKEN → redirecting");
-  window.location.href = "login.html";
-} else {
-  console.log("TOKEN PRESENT → staying on admin");
-}
+        const adminToken = localStorage.getItem("adminToken");
+        console.log("Token from storage:", adminToken);
+        if (!adminToken) {
+          console.log("NO TOKEN → redirecting");
+          console.error("Auth error - staying on page");
+        } else {
+          console.log("TOKEN PRESENT → staying on admin");
+        }
 
 
         // Show section function
@@ -1186,49 +1185,73 @@ if (!adminToken) {
         }
 
         // Check admin authentication
-        function checkAuth() {
-            const token = localStorage.getItem('adminToken');
-            if (!token) {
-                window.location.href = 'admin_login.html';
+            function checkAuth() {
+              const token = localStorage.getItem("adminToken");
+            
+              if (!token) {
+                console.warn("Admin not logged in");
+                return;   // ❌ NO REDIRECT
+              }
             }
-        }
+
+
 
         // Load dashboard stats
-        async function loadStats() {
-            try {
-                const res = await fetch('/api/admin/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (res.ok) {
-                    const stats = await res.json();
-                    document.getElementById('statsGrid').innerHTML = `
-                        <div class="stat-card">
-                            <h3>${stats.totalUsers}</h3>
-                            <p>Total Users</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>${stats.totalScripts}</h3>
-                            <p>Total Scripts</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>${stats.totalFilms}</h3>
-                            <p>Total Films</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>${stats.pendingApprovals}</h3>
-                            <p>Pending Approvals</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>${stats.activeChatrooms}</h3>
-                            <p>Active Chatrooms</p>
-                        </div>
-                    `;
+            async function loadStats() {
+              try {
+                const token = localStorage.getItem("adminToken");
+            
+                if (!token) {
+                  console.warn("No admin token found");
+                  return;
                 }
-            } catch (err) {
-                console.error('Error loading stats:', err);
+            
+                const res = await fetch("/api/admin/stats", {
+                  headers: {
+                    "Authorization": "Bearer " + token
+                  }
+                });
+            
+                // 🚫 Do NOT auto logout
+                if (!res.ok) {
+                  console.warn("Stats API failed:", res.status);
+                  return;
+                }
+            
+                const stats = await res.json();
+            
+                document.getElementById("statsGrid").innerHTML = `
+                  <div class="stat-card">
+                    <h3>${stats.totalUsers || 0}</h3>
+                    <p>Total Users</p>
+                  </div>
+            
+                  <div class="stat-card">
+                    <h3>${stats.totalScripts || 0}</h3>
+                    <p>Total Scripts</p>
+                  </div>
+            
+                  <div class="stat-card">
+                    <h3>${stats.totalFilms || 0}</h3>
+                    <p>Total Films</p>
+                  </div>
+            
+                  <div class="stat-card">
+                    <h3>${stats.pendingApprovals || 0}</h3>
+                    <p>Pending Approvals</p>
+                  </div>
+            
+                  <div class="stat-card">
+                    <h3>${stats.activeChatrooms || 0}</h3>
+                    <p>Active Chatrooms</p>
+                  </div>
+                `;
+            
+              } catch (err) {
+                console.error("Error loading stats:", err);
+              }
             }
-        }
+
 
         // Load users
         async function loadUsers() {
