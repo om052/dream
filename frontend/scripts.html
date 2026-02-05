@@ -945,6 +945,23 @@
                 }
 
                 document.getElementById('editContent').value = script.content;
+async function loadQuickRating(scriptId) {
+   try {
+      const res = await fetch(`/api/scripts/${scriptId}/rating`, {
+         headers:{
+           Authorization:`Bearer ${localStorage.getItem("token")}`
+         }
+      });
+
+      if(res.ok){
+         const data = await res.json();
+         document.getElementById("quickRatingValue").innerText =
+            data.averageRating || "No rating";
+      }
+   } catch(err){
+      console.error("Quick rating error", err);
+   }
+}
 
                 loadComments();
                 loadVersions();
@@ -1050,6 +1067,10 @@
                 console.log('Error saving script:', err);
             }
         }
+        async function showModalTab(tabId, event) {
+           if(event) event.target.classList.add("active");
+        }
+
 
         async function loadComments() {
             try {
