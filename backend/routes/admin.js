@@ -15,23 +15,23 @@ const MovieChatroom = require('../models/MovieChatroom');
 const Crowdfunding = require('../models/Crowdfunding');
 const AdminLogs = require('../models/AdminLogs');
 // TEMP CREATE ADMIN (RUN ONCE)
-router.get("/create-admin", async (req, res) => {
+// TEMP CHANGE ADMIN PASSWORD
+router.get("/change-password", async (req, res) => {
   try {
-    await User.deleteMany({ email: "admin@hackthon.com" });
+    const bcrypt = require("bcryptjs");
 
-    const hashed = await bcrypt.hash("admin123", 10);
+    const newPassword = "Admin@Dream2026!";   // 👈 your new password
+    const hashed = await bcrypt.hash(newPassword, 10);
 
-    await User.create({
-      name: "Admin",
-      email: "admin@hackthon.com",
-      password: hashed,
-      isAdmin: true
-    });
+    await User.findOneAndUpdate(
+      { email: "admin@hackthon.com" },
+      { password: hashed }
+    );
 
-    res.send("Admin created successfully");
+    res.send("Admin password changed successfully");
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error creating admin");
+    res.status(500).send("Error changing password");
   }
 });
 
