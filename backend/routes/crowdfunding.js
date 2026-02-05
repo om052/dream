@@ -4,6 +4,40 @@ const auth = require('../middleware/auth');
 const Crowdfunding = require('../models/Crowdfunding');
 const User = require('../models/User');
 
+
+router.get('/user/contributions', auth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const contributions = await Crowdfunding.find({
+      'contributions.user': userId
+    })
+    .populate('script', 'title genre category author')
+    .select('script contributions goalAmount currentAmount status')
+    .sort({ createdAt: -1 });
+
+    // Filter and format contributions for this user
+    const userContributions = contributions.map(campaign => {
+      const userContrib = campaign.contributions.find(c => c.user.toString() === userId);
+      return {
+        campaignId: campaign._id,
+        script: campaign.script,
+        amount: userContrib.amount,
+        message: userContrib.message,
+        anonymous: userContrib.anonymous,
+        date: userContrib.date,
+        goalAmount: campaign.goalAmount,
+        currentAmount: campaign.currentAmount,
+        status: campaign.status
+      };
+    });
+
+    res.json(userContributions);
+  } catch (error) {
+    console.error('Error fetching user contributions:', error);
+    res.status(500).json({ message: 'Error fetching contributions' });
+  }
+});
 // Get all active crowdfunding campaigns
 router.get('/', auth, async (req, res) => {
   try {
@@ -75,38 +109,6 @@ router.post('/:id/contribute', auth, async (req, res) => {
 });
 
 // Get user's contribution history
-router.get('/user/contributions', auth, async (req, res) => {
-  try {
-    const userId = req.user.id;
 
-    const contributions = await Crowdfunding.find({
-      'contributions.user': userId
-    })
-    .populate('script', 'title genre category author')
-    .select('script contributions goalAmount raisedAmount status')
-    .sort({ createdAt: -1 });
-
-    // Filter and format contributions for this user
-    const userContributions = contributions.map(campaign => {
-      const userContrib = campaign.contributions.find(c => c.user.toString() === userId);
-      return {
-        campaignId: campaign._id,
-        script: campaign.script,
-        amount: userContrib.amount,
-        message: userContrib.message,
-        anonymous: userContrib.anonymous,
-        date: userContrib.date,
-        goalAmount: campaign.goalAmount,
-        raisedAmount: campaign.raisedAmount,
-        status: campaign.status
-      };
-    });
-
-    res.json(userContributions);
-  } catch (error) {
-    console.error('Error fetching user contributions:', error);
-    res.status(500).json({ message: 'Error fetching contributions' });
-  }
-});
 
 module.exports = router;
