@@ -14,6 +14,26 @@ const Movie = require('../models/Movie');
 const MovieChatroom = require('../models/MovieChatroom');
 const Crowdfunding = require('../models/Crowdfunding');
 const AdminLogs = require('../models/AdminLogs');
+// TEMP CREATE ADMIN (RUN ONCE)
+router.get("/create-admin", async (req, res) => {
+  try {
+    await User.deleteMany({ email: "admin@hackthon.com" });
+
+    const hashed = await bcrypt.hash("admin123", 10);
+
+    await User.create({
+      name: "Admin",
+      email: "admin@hackthon.com",
+      password: hashed,
+      isAdmin: true
+    });
+
+    res.send("Admin created successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error creating admin");
+  }
+});
 
 // ✅ ADMIN LOGIN
 router.post("/login", async (req, res) => {
