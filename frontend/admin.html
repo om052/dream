@@ -1148,12 +1148,18 @@
         </div>
     </div>
  <script>
-        let currentSection = 'dashboard';
-        let token = localStorage.getItem('adminToken');
+        console.log("ADMIN PAGE LOADED");
 
-        if (!token) {
-          window.location.href = "login.html";
-        }
+const adminToken = localStorage.getItem("adminToken");
+console.log("Token from storage:", adminToken);
+
+if (!adminToken) {
+  console.log("NO TOKEN → redirecting");
+  window.location.href = "login.html";
+} else {
+  console.log("TOKEN PRESENT → staying on admin");
+}
+
 
         // Show section function
         function showSection(sectionId, element) {
