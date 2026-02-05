@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
 
     // Compare password
   // TEMP PASSWORD CHECK
-if (password !== "admin123") {
+if (password !== "Admin@Dream2026!") {
   return res.status(401).json({ message: "Invalid admin credentials" });
 }
 
