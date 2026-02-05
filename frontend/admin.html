@@ -1148,7 +1148,11 @@
         </div>
     </div>
  <script>
-        console.log("ADMIN PAGE LOADED");
+        function getAdminToken() {
+          return localStorage.getItem("adminToken");
+        }
+        console.log("Admin token:", getAdminToken());
+
 
         const adminToken = localStorage.getItem("adminToken");
         console.log("Token from storage:", adminToken);
