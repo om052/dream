@@ -213,7 +213,7 @@
             const password = document.getElementById('password').value;
 
             try {
-                const res = await fetch('http://localhost:3000/api/auth/login', {
+                const res = await fetch('/api/admin/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -223,16 +223,10 @@
 
                 if (res.ok) {
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    if (data.user.isAdmin) {
-                        window.location.href = 'admin.html';
-                    } else {
-                        alert('Access denied. Admin privileges required.');
-                        localStorage.removeItem('token');
-                        localStorage.removeItem('user');
-                    }
+                    localStorage.setItem('user', JSON.stringify({ ...data.admin, isAdmin: true }));
+                    window.location.href = 'admin.html';
                 } else {
-                    alert(data.msg || 'Login failed');
+                    alert(data.message || 'Login failed');
                 }
             } catch (err) {
                 alert('Server not running. Start backend first!');
