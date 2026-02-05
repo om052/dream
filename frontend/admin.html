@@ -1149,7 +1149,11 @@
     </div>
  <script>
         let currentSection = 'dashboard';
-        const token = localStorage.getItem('adminToken');
+        let token = localStorage.getItem('adminToken');
+
+        if (!token) {
+          window.location.href = "login.html";
+        }
 
         // Show section function
         function showSection(sectionId, element) {
