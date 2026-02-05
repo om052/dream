@@ -2166,7 +2166,7 @@
         // Load platform analytics
         async function loadPlatformAnalytics() {
             try {
-                console.log('Loading analytics with token:', token ? 'Token present' : 'No token');
+               console.log('Loading analytics with token:', getAdminToken() ? 'Token present' : 'No token');
                 const res = await fetch('/api/admin/analytics', {
                     headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
