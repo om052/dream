@@ -337,18 +337,18 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">🎬 MovieMark Admin</div>
-            <div class="nav-item active" onclick="showSection('dashboard')">📊 Dashboard</div>
-            <div class="nav-item" onclick="showSection('analytics')">📈 Analytics</div>
-            <div class="nav-item" onclick="showSection('reports')">📋 Reports</div>
-            <div class="nav-item" onclick="showSection('users')">👥 Users</div>
-            <div class="nav-item" onclick="showSection('projects')">🎬 Projects</div>
-            <div class="nav-item" onclick="showSection('requests')">🤝 Requests</div>
-            <div class="nav-item" onclick="showSection('chatrooms')">💬 Chatrooms</div>
-            <div class="nav-item" onclick="showSection('crowdfunding')">💰 Crowdfunding</div>
-            <div class="nav-item" onclick="showSection('logs')">📋 System Logs</div>
-            <div class="nav-item" onclick="showSection('scripts-ratings')">📜 Scripts & Ratings</div>
-            <div class="nav-item" onclick="showSection('read-lists')">📖 Read Lists</div>
-            <div class="nav-item" onclick="showSection('post-production')">🎬 Post-Production</div>
+            <div class="nav-item active" onclick="showSection('dashboard', this)">📊 Dashboard</div>
+            <div class="nav-item" onclick="showSection('analytics', this)">📈 Analytics</div>
+            <div class="nav-item" onclick="showSection('reports', this)">📋 Reports</div>
+            <div class="nav-item" onclick="showSection('users', this)">👥 Users</div>
+            <div class="nav-item" onclick="showSection('projects', this)">🎬 Projects</div>
+            <div class="nav-item" onclick="showSection('requests', this)">🤝 Requests</div>
+            <div class="nav-item" onclick="showSection('chatrooms', this)">💬 Chatrooms</div>
+            <div class="nav-item" onclick="showSection('crowdfunding', this)">💰 Crowdfunding</div>
+            <div class="nav-item" onclick="showSection('logs', this)">📋 System Logs</div>
+            <div class="nav-item" onclick="showSection('scripts-ratings', this)">📜 Scripts & Ratings</div>
+            <div class="nav-item" onclick="showSection('read-lists', this)">📖 Read Lists</div>
+            <div class="nav-item" onclick="showSection('post-production', this)">🎬 Post-Production</div>
         </div>
 
         <!-- Main Content -->
@@ -1152,7 +1152,7 @@
         const token = localStorage.getItem('adminToken');
 
         // Show section function
-        function showSection(sectionId) {
+        function showSection(sectionId, element) {
             // Hide all sections
             document.querySelectorAll('.section').forEach(sec => {
                 sec.style.display = 'none';
@@ -1165,27 +1165,20 @@
             } else {
                 console.error('Section not found:', sectionId);
             }
+
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element) {
+                element.classList.add('active');
+            }
         }
 
         // Check admin authentication
-        async function checkAuth() {
+        function checkAuth() {
+            const token = localStorage.getItem('adminToken');
             if (!token) {
-                window.location.href = 'admin_login.html';
-                return;
-            }
-
-            try {
-                const res = await fetch('/api/admin/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (!res.ok) {
-                    localStorage.removeItem('adminToken');
-                    window.location.href = 'admin_login.html';
-                }
-            } catch (err) {
-                console.error('Auth check error:', err);
-                localStorage.removeItem('adminToken');
                 window.location.href = 'admin_login.html';
             }
         }
@@ -2590,8 +2583,8 @@
 
         // Logout
         function logout() {
-            localStorage.removeItem('token');
-            window.location.href = 'login.html';
+            localStorage.removeItem('adminToken');
+            window.location.href = 'admin_login.html';
         }
 
         // Load read lists data
@@ -3569,7 +3562,7 @@
         async function clearSystemLogs() {
             if (!confirm('Are you sure you want to clear all system logs? This action cannot be undone.')) return;
 
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
@@ -3593,22 +3586,7 @@
         // Initialize
         checkAuth();
         loadStats();
-     function showSection(sectionId) {
-
-  // Hide all sections
-  document.querySelectorAll(".section").forEach(sec => {
-    sec.style.display = "none";
-  });
-
-  // Show selected section
-  const active = document.getElementById(sectionId);
-  if (active) {
-    active.style.display = "block";
-  } else {
-    console.error("Section not found:", sectionId);
-  }
-
-}
+        showSection('dashboard');
     </script>
 </body>
 </html>
