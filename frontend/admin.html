@@ -1150,33 +1150,30 @@
 
     <script>
         let currentSection = 'dashboard';
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('adminToken');
+
 
         // Check admin authentication
         async function checkAuth() {
             if (!token) {
-                window.location.href = 'login.html';
+               window.location.href = 'admin_login.html';
                 return;
             }
 
             try {
-                const res = await fetch('http://localhost:3000/api/auth/me', {
+              const res = await fetch('/api/admin/stats', {
+
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
                 if (res.ok) {
-                    const user = await res.json();
-                    if (!user.isAdmin) {
-                        alert('Access denied. Admin privileges required.');
-                        window.location.href = 'dashboard.html';
-                    }
-                } else {
-                    localStorage.removeItem('token');
-                    window.location.href = 'login.html';
-                }
+                     localStorage.removeItem("adminToken");
+                     window.location.href = "admin_login.html";
+                
             } catch (err) {
-                console.error('Auth check error:', err);
-                window.location.href = 'login.html';
+                console.error("Auth check error:", err);
+                localStorage.removeItem("adminToken");
+                window.location.href = "admin_login.html";
             }
         }
 
