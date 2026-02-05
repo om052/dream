@@ -1257,7 +1257,7 @@
         async function loadUsers() {
             try {
                 const res = await fetch('/api/admin/users', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1290,7 +1290,7 @@
         async function loadProjects() {
             try {
                 const res = await fetch('/api/admin/projects', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1333,7 +1333,7 @@
         async function loadRequests() {
             try {
                 const res = await fetch('/api/admin/requests', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1367,7 +1367,7 @@
         async function loadChatrooms() {
             try {
                 const res = await fetch('/api/admin/chatrooms', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1399,7 +1399,7 @@
         async function loadChatAnalytics() {
             try {
                 const res = await fetch('/api/chat/admin/analytics', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1457,7 +1457,7 @@
         async function loadReports() {
             try {
                 const res = await fetch('/api/chat/admin/reports', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1516,7 +1516,7 @@
         async function viewMessages(projectId, title) {
             try {
                 const res = await fetch(`/api/chat/${projectId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1583,7 +1583,7 @@
                 try {
                     const res = await fetch(`/api/chat/admin/${messageId}`, {
                         method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` }
+                        headers: {   Authorization: `Bearer ${getAdminToken()}` }
                     });
 
                     if (res.ok) {
@@ -1616,7 +1616,7 @@
             try {
                 const projectId = document.getElementById('projectTitle').textContent.split(' - ')[1];
                 const res = await fetch(`/api/chat/admin/export/${projectId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1642,7 +1642,7 @@
         async function saveChatHistory(projectId, title) {
             try {
                 const res = await fetch(`/api/chat/admin/export/${projectId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1841,7 +1841,7 @@
             try {
                 const res = await fetch(`/api/admin/chatrooms/${projectId}`, {
                     method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1868,7 +1868,7 @@
         async function loadProjectsForChatroom() {
             try {
                 const res = await fetch('/api/admin/projects', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -1909,7 +1909,7 @@
         async function loadUsersForFilmCreation() {
             try {
                 const res = await fetch('/api/admin/users', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2168,7 +2168,7 @@
             try {
                 console.log('Loading analytics with token:', token ? 'Token present' : 'No token');
                 const res = await fetch('/api/admin/analytics', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 console.log('Analytics response status:', res.status);
@@ -2316,7 +2316,7 @@
         async function loadTopContent() {
             try {
                 const res = await fetch('/api/admin/top-content', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2342,7 +2342,7 @@
         async function exportAnalyticsData() {
             try {
                 const res = await fetch('/api/admin/analytics/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2375,7 +2375,7 @@
 
             try {
                 const res = await fetch(`/api/admin/reports/generate?range=${dateRange}&type=${reportType}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2420,7 +2420,7 @@
         async function loadUserActivityReport(dateRange) {
             try {
                 const res = await fetch(`/api/admin/reports/users?range=${dateRange}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2450,7 +2450,7 @@
         async function loadContentPerformanceReport(dateRange) {
             try {
                 const res = await fetch(`/api/admin/reports/content?range=${dateRange}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2482,7 +2482,7 @@
         async function loadSystemHealthReport() {
             try {
                 const res = await fetch('/api/admin/reports/system-health', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2514,7 +2514,7 @@
 
             try {
                 const res = await fetch(`/api/admin/reports/export?range=${dateRange}&type=${reportType}&format=${format}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2622,13 +2622,13 @@
 
         // Load read lists data
         async function loadReadLists() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 // Load read lists stats
                 const statsRes = await fetch('/api/admin/read-lists/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (statsRes.ok) {
@@ -2638,7 +2638,7 @@
 
                 // Load users' read lists
                 const usersRes = await fetch('/api/admin/read-lists/users', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (usersRes.ok) {
@@ -2648,7 +2648,7 @@
 
                 // Load popular scripts
                 const popularRes = await fetch('/api/admin/read-lists/popular', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (popularRes.ok) {
@@ -2716,12 +2716,12 @@
         }
 
         async function exportReadLists() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/read-lists/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2762,13 +2762,13 @@
 
         // Load scripts ratings data
         async function loadScriptsRatings() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 // Load ratings stats
                 const statsRes = await fetch('/api/admin/scripts-ratings/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (statsRes.ok) {
@@ -2778,7 +2778,7 @@
 
                 // Load scripts with ratings
                 const scriptsRes = await fetch('/api/admin/scripts-ratings', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (scriptsRes.ok) {
@@ -2788,7 +2788,7 @@
 
                 // Load rankings
                 const rankingsRes = await fetch('/api/admin/script-rankings', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (rankingsRes.ok) {
@@ -2863,12 +2863,12 @@
         }
 
         async function exportScriptsRatings() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/scripts-ratings/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -2900,13 +2900,13 @@
 
         // Load post-production data
         async function loadPostProduction() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 // Load post-production stats
                 const statsRes = await fetch('/api/admin/post-production/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (statsRes.ok) {
@@ -2916,7 +2916,7 @@
 
                 // Load top rated scripts
                 const scriptsRes = await fetch('/api/admin/script-rankings?limit=20', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (scriptsRes.ok) {
@@ -2926,7 +2926,7 @@
 
                 // Load short films in production
                 const filmsRes = await fetch('/api/admin/post-production/short-films', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (filmsRes.ok) {
@@ -3071,7 +3071,7 @@
             try {
                 const res = await fetch(`/api/admin/post-production/short-films/${filmId}`, {
                     method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3087,12 +3087,12 @@
         }
 
         async function exportPostProduction() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/post-production/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3127,12 +3127,12 @@
 
         // Load crowdfunding stats
         async function loadCrowdfundingStats() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/crowdfunding/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3163,12 +3163,12 @@
 
         // Load available scripts for crowdfunding
         async function loadAvailableScripts() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/crowdfunding/available-scripts', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3195,12 +3195,12 @@
 
         // Load crowdfunding campaigns
         async function loadCrowdfundingCampaigns() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/crowdfunding', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3234,12 +3234,12 @@
 
         // Load user funding dashboards
         async function loadUserFundingDashboards() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/crowdfunding/contributions/users', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3276,12 +3276,12 @@
 
         // Load users for campaign creation
         async function loadUsersForCampaignCreation() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/users', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3312,7 +3312,7 @@
                 return;
             }
 
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
@@ -3348,12 +3348,12 @@
 
         // View campaign details
         async function viewCampaign(campaignId) {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch(`/api/admin/crowdfunding/${campaignId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3376,13 +3376,13 @@
         async function deleteCampaign(campaignId) {
             if (!confirm('Are you sure you want to delete this campaign?')) return;
 
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch(`/api/admin/crowdfunding/${campaignId}`, {
                     method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3400,12 +3400,12 @@
 
         // View user dashboard
         async function viewUserDashboard(userId) {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch(`/api/admin/crowdfunding/user/${userId}/dashboard`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3420,12 +3420,12 @@
 
         // Export crowdfunding data
         async function exportCrowdfundingData() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/crowdfunding/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3457,7 +3457,7 @@
 
         // Load system logs
         async function loadSystemLogs() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             const level = document.getElementById('logLevelFilter').value;
@@ -3472,7 +3472,7 @@
                 });
 
                 const res = await fetch(`/api/admin/logs?${params}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3554,12 +3554,12 @@
 
         // Export system logs
         async function exportSystemLogs() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('adminToken');
             if (!token) return;
 
             try {
                 const res = await fetch('/api/admin/logs/export', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
@@ -3601,7 +3601,7 @@
             try {
                 const res = await fetch('/api/admin/logs', {
                     method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {   Authorization: `Bearer ${getAdminToken()}` }
                 });
 
                 if (res.ok) {
