@@ -1501,7 +1501,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ status })
                 });
@@ -1561,7 +1561,7 @@
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'Authorization': `Bearer ${getAdminToken()}`
                         },
                         body: JSON.stringify({ message: newMessage })
                     });
@@ -1724,7 +1724,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ isBlocked: !currentlyBlocked })
                 });
@@ -1754,7 +1754,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ status })
                 });
@@ -1776,7 +1776,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ pinned: !currentlyPinned })
                 });
@@ -1798,7 +1798,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ status })
                 });
@@ -1823,7 +1823,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ endTime })
                 });
@@ -1956,7 +1956,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({
                         scriptId,
@@ -2018,7 +2018,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify(filmData)
                 });
@@ -2068,7 +2068,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify(formData)
                 });
@@ -2101,7 +2101,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify(formData)
                 });
@@ -2139,7 +2139,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify(formData)
                 });
@@ -3021,7 +3021,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({
                         scriptId,
@@ -3052,7 +3052,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({ progress: parseInt(progress) })
                 });
@@ -3324,7 +3324,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getAdminToken()}`
                     },
                     body: JSON.stringify({
                         scriptId,
