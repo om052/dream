@@ -48,10 +48,11 @@ router.post("/login", async (req, res) => {
     }
 
     // Compare password
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid admin credentials" });
-    }
+  // TEMP PASSWORD CHECK
+if (password !== "admin123") {
+  return res.status(401).json({ message: "Invalid admin credentials" });
+}
+
 
     // Generate token
     const token = jwt.sign(
